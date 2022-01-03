@@ -1,5 +1,9 @@
 {
   "start-page": {
     "title": "¡Noche de Preguntas!"
+  },
+  "trivia": {
+    "question": "Pregunta",
+    "options": "Opciones"
   }
 }
