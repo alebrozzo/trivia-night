@@ -3,18 +3,18 @@ import { shuffle } from "../utils/arrays";
 const maxIncorrectOptions = 3;
 
 // internal trivia interface
-export interface TriviaAnswer {
+export interface ITriviaAnswer {
   answer: string;
   isCorrect: boolean;
 }
 
-export interface Trivia {
+export interface ITrivia {
   question: string;
-  answers: TriviaAnswer[];
+  answers: ITriviaAnswer[];
 }
 
 // external providers trivia interfaces
-export interface TriviaWillFry {
+export interface ITriviaWillFry {
   id: number;
   category: string;
   type: "Multiple Choice" | "Boolean";
@@ -24,8 +24,8 @@ export interface TriviaWillFry {
 }
 
 // mappers
-export function mapFromTriviaWillFry(trivia: TriviaWillFry): Trivia {
-  const answers: TriviaAnswer[] = [{ answer: trivia.correctAnswer, isCorrect: true }];
+export function mapFromTriviaWillFry(trivia: ITriviaWillFry): ITrivia {
+  const answers: ITriviaAnswer[] = [{ answer: trivia.correctAnswer, isCorrect: true }];
   // This API returns a different number of incorrect answers per question, so normalize to up to our default.
   const optionsToReturn = Math.min(maxIncorrectOptions, trivia.incorrectAnswers.length);
   for (let ix = 0; ix < optionsToReturn; ix++) {
@@ -36,7 +36,7 @@ export function mapFromTriviaWillFry(trivia: TriviaWillFry): Trivia {
     });
   }
 
-  const internal: Trivia = {
+  const internal: ITrivia = {
     question: trivia.question,
     answers: shuffle(answers),
   };

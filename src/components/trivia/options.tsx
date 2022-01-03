@@ -1,9 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { ITriviaAnswer } from "../../models/trivia";
 import "./trivia.css";
 
 interface Props {
-  answers: string;
+  answers: ITriviaAnswer[];
 }
 
 const Options: React.FC<Props> = ({ answers }) => {
@@ -11,7 +12,11 @@ const Options: React.FC<Props> = ({ answers }) => {
   return (
     <>
       <h2>{t("trivia.options")}</h2>
-      <p>{answers}</p>
+      <ol>
+        {answers.map((a) => (
+          <li>{a.answer}</li>
+        ))}
+      </ol>
     </>
   );
 };

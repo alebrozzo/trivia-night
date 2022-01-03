@@ -1,20 +1,20 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { ITrivia } from "../../models/trivia";
 import { Options } from "./options";
 import { Question } from "./question";
 import "./trivia.css";
 
 interface Props {
-  question: string;
-  options: string;
+  trivia: ITrivia;
 }
 
-const Trivia: React.FC<Props> = ({ question, options }) => {
+const Trivia: React.FC<Props> = ({ trivia }) => {
   const { t } = useTranslation();
   return (
     <>
-      <Question question={question}></Question>
-      <Options answers={options}></Options>
+      <Question question={trivia.question}></Question>
+      <Options answers={trivia.answers}></Options>
     </>
   );
 };
