@@ -13,8 +13,8 @@ const Options: React.FC<Props> = ({ answers }) => {
     <>
       <h2>{t("trivia.options")}</h2>
       <ol>
-        {answers.map((a) => (
-          <li>{a.answer}</li>
+        {answers.map((a, ix) => (
+          <li key={ix}>{a.answer}</li>
         ))}
       </ol>
     </>

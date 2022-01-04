@@ -1,2 +1,14 @@
 .App {
 }
+
+.center {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+h1,
+.title {
+  width: 100%;
+  text-align: center;
+}
