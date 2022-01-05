@@ -10,7 +10,7 @@ const Header: React.FC<Props> = ({}) => {
   return (
     <header>
       <div className="center title">
-        <h1>{t("start-page.title")}</h1>
+        <h1>{t("header.title")}</h1>
       </div>
       <LanguageSelector></LanguageSelector>
     </header>
