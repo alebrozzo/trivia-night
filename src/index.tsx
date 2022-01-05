@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
+import { StartScreen } from "./components/start-screen/start-screen";
 import { GameScreen } from "./components/game-screen/game-screen";
 import { JoinScreen } from "./components/join-screen/join-screen";
 import { CreateScreen } from "./components/create-screen/create-screen";
@@ -13,10 +14,12 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/game" element={<GameScreen />} />
-        <Route path="/join" element={<JoinScreen />} />
-        <Route path="/create" element={<CreateScreen />} />
+        <Route path="/" element={<App />}>
+          <Route path="/" element={<StartScreen />} />
+          <Route path="/game" element={<GameScreen />} />
+          <Route path="/join" element={<JoinScreen />} />
+          <Route path="/create" element={<CreateScreen />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
