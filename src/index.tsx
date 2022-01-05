@@ -1,11 +1,13 @@
+import "./i18n/config";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
-import "./i18n/config";
-import "./index.css";
 import { GameScreen } from "./components/game-screen/game-screen";
+import { JoinScreen } from "./components/join-screen/join-screen";
+import { CreateScreen } from "./components/create-screen/create-screen";
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,6 +15,8 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/game" element={<GameScreen />} />
+        <Route path="/join" element={<JoinScreen />} />
+        <Route path="/create" element={<CreateScreen />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
