@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getTriviaWillFry, mapFromTriviaWillFry } from "../../models/trivia";
-import { Trivia } from "../trivia/trivia";
-import "./game-screen.css";
+import { Trivia } from "../../components/trivia/trivia";
+import "./game.css";
 
 interface Props {}
 
-const GameScreen: React.FC<Props> = ({}) => {
+const GameScreen: React.FC<Props> = () => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);

@@ -4,10 +4,10 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
-import { StartScreen } from "./components/start-screen/start-screen";
-import { GameScreen } from "./components/game-screen/game-screen";
-import { JoinScreen } from "./components/join-screen/join-screen";
-import { CreateScreen } from "./components/create-screen/create-screen";
+import { StartScreen } from "./pages/start/start";
+import { GameScreen } from "./pages/game/game";
+import { JoinScreen } from "./pages/join-game/join-game";
+import { CreateScreen } from "./pages/create-game/create-game";
 import "./index.css";
 
 ReactDOM.render(

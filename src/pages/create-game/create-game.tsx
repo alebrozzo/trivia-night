@@ -1,9 +1,9 @@
 import React from "react";
-import "./create-screen.css";
+import "./create-game.css";
 
 interface Props {}
 
-const CreateScreen: React.FC<Props> = ({}) => {
+const CreateScreen: React.FC<Props> = () => {
   return <div>Create page placeholder</div>;
 };
 
