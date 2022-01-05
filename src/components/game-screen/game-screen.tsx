@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getTriviaWillFry, mapFromTriviaWillFry } from "../../models/trivia";
-import { Header } from "../header/header";
 import { Trivia } from "../trivia/trivia";
 import "./game-screen.css";
 
@@ -40,7 +39,6 @@ const GameScreen: React.FC<Props> = ({}) => {
     const tempTrivia = mapFromTriviaWillFry(tempItem);
     return (
       <>
-        <Header></Header>
         <Trivia trivia={tempTrivia}></Trivia>
       </>
     );
