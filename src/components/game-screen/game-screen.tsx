@@ -1,28 +1,50 @@
-import React from "react";
-import { ITrivia } from "../../models/trivia";
+import React, { useEffect, useState } from "react";
+import { getTriviaWillFry, mapFromTriviaWillFry } from "../../models/trivia";
 import { Header } from "../header/header";
 import { Trivia } from "../trivia/trivia";
 import "./game-screen.css";
 
 interface Props {}
 
-const tempTrivia: ITrivia = {
-  question: "Who designed the album sleeve for The Rolling Stones LP 'Sticky Fingers'?",
-  answers: [
-    { answer: "Salvador Dali", isCorrect: false },
-    { answer: "John Lennon", isCorrect: false },
-    { answer: "Andy Warhol", isCorrect: true },
-    { answer: "David Bowie", isCorrect: false },
-  ],
-};
-
 const GameScreen: React.FC<Props> = ({}) => {
-  return (
-    <>
-      <Header></Header>
-      <Trivia trivia={tempTrivia}></Trivia>
-    </>
-  );
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    getTriviaWillFry([], 20).then(
+      (result) => {
+        console.log(result);
+        setItems(result);
+        setIsLoaded(true);
+      },
+      // Note: it's important to handle errors here
+      // instead of a catch() block so that we don't swallow
+      // exceptions from actual bugs in components.
+      (error) => {
+        console.log("error", error);
+        setIsLoaded(true);
+        setError(error);
+      }
+    );
+  }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    console.log(items);
+
+    const tempItem = items[0];
+    const tempTrivia = mapFromTriviaWillFry(tempItem);
+    return (
+      <>
+        <Header></Header>
+        <Trivia trivia={tempTrivia}></Trivia>
+      </>
+    );
+  }
 };
 
 export { GameScreen };

@@ -14,6 +14,12 @@ export interface ITrivia {
 }
 
 // external providers trivia interfaces
+
+export function getTriviaWillFry(categories: string[], count: number) {
+  const url = `https://api.trivia.willfry.co.uk/questions?categories=${categories.join(",")}&limit=${count}`;
+  return fetch(url).then((res) => res.json());
+}
+
 export interface ITriviaWillFry {
   id: number;
   category: string;
@@ -25,6 +31,8 @@ export interface ITriviaWillFry {
 
 // mappers
 export function mapFromTriviaWillFry(trivia: ITriviaWillFry): ITrivia {
+  console.log(trivia);
+
   const answers: ITriviaAnswer[] = [{ answer: trivia.correctAnswer, isCorrect: true }];
   // This API returns a different number of incorrect answers per question, so normalize to up to our default.
   const optionsToReturn = Math.min(maxIncorrectOptions, trivia.incorrectAnswers.length);
