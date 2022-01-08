@@ -1,6 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, CollectionReference, collection, DocumentData } from "firebase/firestore/lite";
+import {
+  getFirestore,
+  CollectionReference,
+  collection,
+  DocumentData,
+  doc,
+  setDoc,
+  DocumentReference,
+} from "firebase/firestore/lite";
 import { User, getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { IGame } from "./models/game";
 
@@ -47,9 +55,16 @@ const createCollection = <T = DocumentData>(collectionName: string) => {
 };
 
 const gamesCollection = createCollection<IGame>("games");
+function getGameReference(id: string): DocumentReference<IGame> {
+  return doc(gamesCollection, id);
+}
+async function saveGame(ref: DocumentReference<IGame>, game: IGame) {
+  await setDoc(ref, game);
+}
 
 const storageProvider = {
-  games: gamesCollection,
+  getGameReference,
+  saveGame,
 };
 
 export {

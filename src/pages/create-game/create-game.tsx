@@ -1,4 +1,3 @@
-import { doc, setDoc } from "firebase/firestore/lite";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { storageProvider } from "../../firebase";
@@ -8,8 +7,10 @@ interface Props {}
 
 const CreateScreen: React.FC<Props> = () => {
   async function createGame() {
-    const gameRef = doc(storageProvider.games, "tempId");
-    await setDoc(gameRef, {
+    const gameRef = storageProvider.getGameReference("asdfgjk");
+    console.log(gameRef);
+
+    await storageProvider.saveGame(gameRef, {
       id: gameRef.id,
       dateCreated: new Date(),
     });
