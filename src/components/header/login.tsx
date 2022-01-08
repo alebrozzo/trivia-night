@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { authProvider, User } from "../../firebase";
 
@@ -10,11 +10,15 @@ const Login: React.FC<Props> = ({}) => {
   const { t } = useTranslation();
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
+  useEffect(() => {
+    const unsubscribeFn = authProvider.onAuthStateChanged((value: User | null) => {
+      console.log("state changed", value);
+      setCurrentUser(value);
+    });
+    return unsubscribeFn;
+  }, []);
+
   console.log({ currentUser });
-  authProvider.onAuthStateChanged((value: User | null) => {
-    console.log("state changed", value);
-    setCurrentUser(value);
-  });
 
   return currentUser ? (
     <div>
