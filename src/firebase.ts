@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getFirestore, CollectionReference, collection, DocumentData } from "firebase/firestore/lite";
 import { User, getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { IGame } from "./models/game";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -19,6 +21,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const store = getFirestore(app);
 const auth = getAuth(app);
 
 const authProvider = {
@@ -38,7 +41,19 @@ const authProvider = {
   },
 };
 
+// This is just a helper to add the type to the db responses
+const createCollection = <T = DocumentData>(collectionName: string) => {
+  return collection(store, collectionName) as CollectionReference<T>;
+};
+
+const gamesCollection = createCollection<IGame>("games");
+
+const storageProvider = {
+  games: gamesCollection,
+};
+
 export {
   type User,
+  storageProvider,
   authProvider,
 };

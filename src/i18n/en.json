@@ -11,6 +11,9 @@
     "or": "or",
     "join": "Join game"
   },
+  "create-screen": {
+    "create": "Start new game"
+  },
   "trivia": {
     "question": "Question",
     "options": "Options"
