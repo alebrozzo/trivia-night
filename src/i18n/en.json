@@ -1,4 +1,8 @@
 {
+  "login": {
+    "google": "Login with Google",
+    "logout": "Log Out"
+  },
   "header": {
     "title": "Trivia Night!"
   },

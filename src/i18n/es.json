@@ -1,4 +1,8 @@
 {
+  "login": {
+    "google": "Entrar con Google",
+    "logout": "Salir"
+  },
   "header": {
     "title": "¡Noche de Preguntas!"
   },
