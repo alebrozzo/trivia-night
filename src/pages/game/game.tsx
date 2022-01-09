@@ -5,13 +5,20 @@ import { GameState, IGame } from "../../models/game";
 import { Game } from "../../components/game/game";
 import { CreateGame } from "../../components/game/create-game";
 import { JoinGame } from "../../components/game/join-game";
+import { WaitingPlayers } from "../../components/game/waiting-players";
 import "./game.css";
 
 interface Props {}
 
+const emptyGame: IGame = {
+  id: "00000",
+  state: GameState.NotCreated,
+  dateCreated: new Date(),
+};
+
 const GamePage: React.FC<Props> = () => {
   const { t } = useTranslation();
-  const [game, setGame] = useState(null as unknown as IGame);
+  const [game, setGame] = useState(emptyGame);
 
   async function createGame() {
     const gameRef = storageProvider.getGameReference("asdfgjk");
@@ -31,19 +38,24 @@ const GamePage: React.FC<Props> = () => {
     setGame(newGame);
   }
 
+  function startGame() {
+    const updatedGame = { ...game, state: GameState.Playing };
+    setGame(updatedGame);
+  }
+
   console.log({ game });
 
   return (
     <div>
-      {!game && (
+      {game.state === GameState.NotCreated && (
         <>
           <CreateGame createGameHandler={createGame} />
           <p>{t("game.or")}</p>
           <JoinGame />
         </>
       )}
-      {game && game.state === GameState.NotStarted && <Game game={game} />}
-      {game && game.state === GameState.Playing && <Game game={game} />}
+      {game.state === GameState.NotStarted && <WaitingPlayers startGameHandler={startGame} />}
+      {game.state === GameState.Playing && <Game game={game} />}
     </div>
   );
 };
