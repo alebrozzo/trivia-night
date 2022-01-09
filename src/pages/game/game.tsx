@@ -38,7 +38,7 @@ const GamePage: React.FC<Props> = () => {
       {!game && (
         <>
           <CreateGame createGameHandler={createGame} />
-          <p>{t("start-screen.or")}</p>
+          <p>{t("game.or")}</p>
           <JoinGame />
         </>
       )}

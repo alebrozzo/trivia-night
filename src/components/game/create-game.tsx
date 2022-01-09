@@ -8,7 +8,7 @@ interface Props {
 
 const CreateGame: React.FC<Props> = ({createGameHandler}) => {
   const { t } = useTranslation();
-  return <button onClick={createGameHandler}>{t("create-screen.create")}</button>;
+  return <button onClick={createGameHandler}>{t("game.create")}</button>;
 };
 
 export { CreateGame };

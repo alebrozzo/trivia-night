@@ -9,7 +9,7 @@ const JoinGame: React.FC<Props> = () => {
 
   return (
     <div>
-      {t("start-screen.join")}
+      {t("game.join")}
       <input type={"text"}></input>
     </div>
   );

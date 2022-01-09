@@ -6,13 +6,11 @@
   "header": {
     "title": "Trivia Night!"
   },
-  "start-screen": {
+  "game": {
     "create": "Create game",
     "or": "or",
-    "join": "Join game"
-  },
-  "create-screen": {
-    "create": "Start new game"
+    "join": "Join game",
+    "start": "Start new game"
   },
   "trivia": {
     "question": "Question",

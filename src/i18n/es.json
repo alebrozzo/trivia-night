@@ -6,13 +6,11 @@
   "header": {
     "title": "¡Noche de Preguntas!"
   },
-  "start-screen": {
+  "game": {
     "create": "Crear juego",
     "or": "o",
-    "join": "Unirse al juego"
-  },
-  "create-screen": {
-    "create": "Comenzar nuevo juego"
+    "join": "Unirse a un juego",
+    "start": "Comenzar nuevo juego"
   },
   "trivia": {
     "question": "Pregunta",
