@@ -12,7 +12,7 @@ const Login: React.FC<Props> = ({}) => {
 
   useEffect(() => {
     const unsubscribeFn = authProvider.onAuthStateChanged((value: User | null) => {
-      console.log("state changed", value);
+      console.log("state changed", { currentUser, value });
       setCurrentUser(value);
     });
     return unsubscribeFn;

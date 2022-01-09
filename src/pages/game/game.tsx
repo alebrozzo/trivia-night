@@ -1,48 +1,51 @@
-import React, { useEffect, useState } from "react";
-import { getTriviaWillFry, mapFromTriviaWillFry } from "../../models/trivia";
-import { Trivia } from "../../components/trivia/trivia";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { storageProvider } from "../../firebase";
+import { GameState, IGame } from "../../models/game";
+import { Game } from "../../components/game/game";
+import { CreateGame } from "../../components/game/create-game";
+import { JoinGame } from "../../components/game/join-game";
 import "./game.css";
 
 interface Props {}
 
-const GameScreen: React.FC<Props> = () => {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
+const GamePage: React.FC<Props> = () => {
+  const { t } = useTranslation();
+  const [game, setGame] = useState(null as unknown as IGame);
 
-  useEffect(() => {
-    getTriviaWillFry([], 20).then(
-      (result) => {
-        console.log(result);
-        setItems(result);
-        setIsLoaded(true);
-      },
-      // Note: it's important to handle errors here
-      // instead of a catch() block so that we don't swallow
-      // exceptions from actual bugs in components.
-      (error) => {
-        console.log("error", error);
-        setIsLoaded(true);
-        setError(error);
-      }
-    );
-  }, []);
+  async function createGame() {
+    const gameRef = storageProvider.getGameReference("asdfgjk");
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
-  } else {
-    console.log(items);
+    const newGame: IGame = {
+      id: gameRef.id,
+      state: GameState.NotStarted,
+      dateCreated: new Date(),
+    };
 
-    const tempItem = items[0];
-    const tempTrivia = mapFromTriviaWillFry(tempItem);
-    return (
-      <>
-        <Trivia trivia={tempTrivia}></Trivia>
-      </>
-    );
+    console.log(gameRef, newGame);
+
+    console.log("Saving to database");
+    await storageProvider.saveGame(gameRef, newGame);
+
+    console.log("Saving to state");
+    setGame(newGame);
   }
+
+  console.log({ game });
+
+  return (
+    <div>
+      {game ? (
+        <Game game={game} />
+      ) : (
+        <>
+          <CreateGame createGameHandler={createGame} />
+          <p>{t("start-screen.or")}</p>
+          <JoinGame />
+        </>
+      )}
+    </div>
+  );
 };
 
-export { GameScreen };
+export { GamePage };
