@@ -35,15 +35,15 @@ const GamePage: React.FC<Props> = () => {
 
   return (
     <div>
-      {game ? (
-        <Game game={game} />
-      ) : (
+      {!game && (
         <>
           <CreateGame createGameHandler={createGame} />
           <p>{t("start-screen.or")}</p>
           <JoinGame />
         </>
       )}
+      {game && game.state === GameState.NotStarted && <Game game={game} />}
+      {game && game.state === GameState.Playing && <Game game={game} />}
     </div>
   );
 };
